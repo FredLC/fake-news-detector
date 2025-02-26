@@ -21,13 +21,35 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center p-10 bg-gray-100">
-      <h1 className="text-2xl font-bold mb-4">Fake News Detector</h1>
-      <textarea className="border p-2 w-full max-w-lg" rows="4" onChange={(e) => setText(e.target.value)}></textarea>
-      <button onClick={checkNews} className="mt-3 px-4 py-2 bg-blue-500 text-white rounded">
-        {loading ? "Checking..." : "Check News"}
-      </button>
-      {result && <p className="mt-4 p-4 bg-gray-200 rounded">{result}</p>}
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-white px-4">
+      <div className="max-w-lg w-full p-6 bg-gray-800 rounded-2xl shadow-xl">
+        <h1 className="text-2xl font-bold text-center mb-4">
+          Fake News Detector 📰
+        </h1>
+        <textarea
+          className="w-full p-3 rounded-md bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+          rows="4"
+          placeholder="Enter news text..."
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+        />
+        <button
+          onClick={checkNews}
+          className="w-full mt-4 bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded-lg transition"
+          disabled={loading}
+        >
+          {loading ? "Checking..." : "Check News"}
+        </button>
+        {result && (
+          <div className="mt-4 text-lg font-semibold text-center">
+            {result === "Fake News" ? (
+              <span className="text-red-500">🚨 Fake News Detected! 🚨</span>
+            ) : (
+              <span className="text-green-400">✅ This news seems real.</span>
+            )}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
